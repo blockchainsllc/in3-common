@@ -22,6 +22,9 @@ const Buffer: any = require('buffer').Buffer
 
 import * as ethUtil from 'ethereumjs-util'
 import { RPCResponse } from '../types/types'
+import { Block, hash, rlp } from './serialize'
+import { publicToAddress } from 'ethereumjs-util'
+import { recover } from 'secp256k1'
 
 const BN = ethUtil.BN
 
@@ -213,4 +216,24 @@ export function padEnd(val: string, minLength: number, fill = ' ') {
   while (val.length < minLength)
     val = val + fill
   return val
+}
+
+
+export function createRandomIndexes(len: number, limit: number, seed: Buffer, result: number[] = []) {
+  let step = seed.readUIntBE(0, 6) // first 6 bytes
+  let pos = seed.readUIntBE(6, 6) % len// next 6 bytes
+  while (result.length < limit) {
+    if (result.indexOf(pos) >= 0)
+      step = (seed = ethUtil.keccak256(seed)).readUIntBE(0, 6)
+    else
+      result.push(pos)
+    pos = (pos + step) % len
+  }
+  return result
+}
+
+export function getSigner(data: Block): Buffer {
+  const signature: Buffer = data.sealedFields[1];
+  const message = data.sealedFields.length === 3 ? hash(Buffer.concat([data.bareHash(), rlp.encode(data.sealedFields[2])])) : data.bareHash();
+  return publicToAddress(recover(message, signature.slice(0, 64), signature[64]), true);
 }

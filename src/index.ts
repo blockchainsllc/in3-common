@@ -23,6 +23,7 @@ export const validate = _validate
 
 import * as _util from './util/util'
 export const util = _util
+export const createRandomIndexes =  _util.createRandomIndexes
 
 import * as types from './types/types'
 export type RPCRequest = types.RPCRequest
