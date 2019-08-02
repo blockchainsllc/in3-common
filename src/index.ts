@@ -53,5 +53,6 @@ export type TransactionData = _serialize.TransactionData
 import * as _transport from './util/transport'
 export const transport = _transport
 export type Transport = _transport.Transport
+export const AxiosTransport = _transport.AxiosTransport
 
 
