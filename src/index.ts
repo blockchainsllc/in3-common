@@ -24,3 +24,34 @@ export const validate = _validate
 import * as _util from './util/util'
 export const util = _util
 
+import * as types from './types/types'
+export type RPCRequest = types.RPCRequest
+export type AccountProof = types.AccountProof
+export type IN3Config = types.IN3Config
+export type IN3NodeConfig = types.IN3NodeConfig
+export type IN3NodeWeight = types.IN3NodeWeight
+export type IN3RPCRequestConfig = types.IN3RPCRequestConfig
+export type IN3ResponseConfig = types.IN3ResponseConfig
+export type LogProof = types.LogProof
+export type Proof = types.Proof
+export type AuraValidatoryProof = types.AuraValidatoryProof
+export type RPCResponse = types.RPCResponse
+export type Signature = types.Signature
+export type ServerList = types.ServerList
+export type IN3RPCConfig = types.IN3RPCConfig
+export type IN3RPCHandlerConfig = types.IN3RPCHandlerConfig
+export type ChainSpec = types.ChainSpec
+
+
+import * as _serialize from './util/serialize'
+export const serialize = _serialize
+export type BlockData = _serialize.BlockData
+export type LogData = _serialize.LogData
+export type ReceiptData = _serialize.ReceiptData
+export type TransactionData = _serialize.TransactionData
+
+import * as _transport from './util/transport'
+export const transport = _transport
+export type Transport = _transport.Transport
+
+
