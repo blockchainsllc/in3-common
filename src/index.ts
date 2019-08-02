@@ -61,3 +61,4 @@ import * as _storage from './util/storage'
 export const storage = _storage
 
 export const typeDefs = types.validationDef
+export const chainAliases = _util.aliases

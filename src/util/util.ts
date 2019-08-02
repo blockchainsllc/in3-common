@@ -237,3 +237,5 @@ export function getSigner(data: Block): Buffer {
   const message = data.sealedFields.length === 3 ? hash(Buffer.concat([data.bareHash(), rlp.encode(data.sealedFields[2])])) : data.bareHash();
   return publicToAddress(recover(message, signature.slice(0, 64), signature[64]), true);
 }
+
+export const aliases = { kovan: '0x2a', tobalaba: '0x44d', main: '0x1', ipfs: '0x7d0', mainnet: '0x1', goerli: '0x5' }
