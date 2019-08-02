@@ -2,7 +2,7 @@
   "name": "in3-utils",
   "version": "1.0.0",
   "description": "Basic utility functions for in3 server and in3 client (ts versions )",
-  "main": "js/src/index.js",
+  "main": "js/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc -p ."
