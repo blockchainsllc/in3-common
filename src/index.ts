@@ -55,4 +55,5 @@ export const transport = _transport
 export type Transport = _transport.Transport
 export const AxiosTransport = _transport.AxiosTransport
 
-
+import * as _storage from './util/storage'
+export const storage = _storage
