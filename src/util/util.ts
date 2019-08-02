@@ -21,7 +21,7 @@
 const Buffer: any = require('buffer').Buffer
 
 import * as ethUtil from 'ethereumjs-util'
-//import { RPCResponse } from '../types/types'
+import { RPCResponse } from '../types/types'
 
 const BN = ethUtil.BN
 
@@ -51,6 +51,15 @@ export function toUtf8(val: any): string {
   return val.toString('utf8')
 }
 
+
+/**
+ * check a RPC-Response for errors and rejects the promise if found
+ */
+export function checkForError<T extends RPCResponse | RPCResponse[]>(res: T): T {
+  if (Array.isArray(res))
+    return res.find(_ => !!_.error) ? Promise.reject(new Error(res.find(_ => !!_.error).error)) as any : res as T
+  return (res as RPCResponse).error ? Promise.reject(new Error((res as RPCResponse).error)) as any : res as T
+}
 
 /**
  * convert to BigNumber

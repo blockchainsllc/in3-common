@@ -18,7 +18,8 @@
 ***********************************************************/
 
 
-import * as validateOb from './util/validate'
+import * as _validate from './util/validate'
+export const validate = _validate
 
 import * as _util from './util/util'
 export const util = _util
