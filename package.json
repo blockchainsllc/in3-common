@@ -1,7 +1,7 @@
 {
-  "name": "in3-utils",
+  "name": "in3-common",
   "version": "1.0.0",
-  "description": "Basic utility functions for in3 server and in3 client (ts versions )",
+  "description": "Common functions for in3 server and in3 client (ts versions )",
   "main": "js/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
