@@ -46,49 +46,6 @@ definitions:
                 description: blacklisted because of failed requests until the timestamp
                 type: integer
                 example: 1529074639623
-
-    IN3NodeConfig:
-        description: a configuration of a in3-server.
-        type: object
-        required: [address, url, deposit, chainIds]
-        properties:
-            index:
-                description: the index within the contract
-                type: integer
-                example: 13
-            address:
-                description: the address of the node, which is the public address it iis signing with.
-                type: string
-                format: address
-                example: "0x6C1a01C2aB554930A937B0a2E8105fB47946c679"
-            timeout:
-                description: the time (in seconds) until an owner is able to receive his deposit back after he unregisters himself
-                type: integer
-                example: 3600
-            url:
-                description: the endpoint to post to
-                type: string
-                example: "https://in3.slock.it"
-            chainIds:
-                description: the list of supported chains
-                example: ["0x1"]
-                type: array
-                items:
-                    type: string
-                    format: hex
-            deposit:
-                description: the deposit of the node in wei
-                type: integer
-                example: 12350000
-            capacity:
-                description: the capacity of the node.
-                type: integer
-                example: 100
-            props:
-                description: the properties of the node.
-                type: integer
-                example: 3
-
     IN3RPCRequestConfig:
         description: additional config for a IN3 RPC-Request
         required: [chainId]
@@ -197,216 +154,6 @@ definitions:
                 description: the current blocknumber.
                 type: number
                 example: 320126478
-
-    ChainSpec:
-        type: object
-        description: describes the chainspecific consensus params
-        properties:
-            block:
-                description: the blocknumnber when this configuration should apply
-                type: number
-            engine:
-                description: the engine type (like Ethhash, authorityRound, ... )
-                type: string
-                enum: ["ethHash", "authorityRound", "clique"]
-            list:
-                description: The list of validators at the particular block
-                type: array
-                items:
-                    type: string
-                    format: address
-            contract:
-                description: The validator contract at the block
-                type: string
-            requiresFinality:
-                description: indicates whether the transition requires a finality check
-                type: boolean
-                example: true
-            bypassFinality:
-                description: Bypass finality check for transition to contract based Aura Engines
-                type: number
-                example: bypassFinality = 10960502 -> will skip the finality check and add the list at block 10960502
-
-    IN3Config:
-        description: the iguration of the IN3-Client. This can be paritally overriden for every request.
-        type: object
-        required: [minDeposit, requestCount, chainId]
-        properties:
-            cacheTimeout:
-                type: number
-                description: number of seconds requests can be cached.
-            nodeLimit:
-                description: the limit of nodes to store in the client.
-                type: number
-                example: 150
-            keepIn3:
-                description: if true, the in3-section of thr response will be kept. Otherwise it will be removed after validating the data. This is useful for debugging or if the proof should be used afterwards.
-                type: boolean
-                example: false
-            format:
-                description: the format for sending the data to the client. Default is json, but using cbor means using only 30-40% of the payload since it is using binary encoding
-                type: string
-                enum: ["json", "jsonRef", "cbor"]
-                example: json
-            key:
-                description: the client key to sign requests
-                example: "0x387a8233c96e1fc0ad5e284353276177af2186e7afa85296f106336e376669f7"
-            autoConfig:
-                description: if true the config will be adjusted depending on the request
-                type: boolean
-                example: false
-            retryWithoutProof:
-                description: if true the the request may be handled without proof in case of an error. (use with care!)
-                type: boolean
-                example: false
-            maxAttempts:
-                description: max number of attempts in case a response is rejected
-                type: number
-                example: 10
-            includeCode:
-                description: if true, the request should include the codes of all accounts. otherwise only the the codeHash is returned. In this case the client may ask by calling eth_getCode() afterwards
-                type: boolean
-                example: true
-            maxCodeCache:
-                description: number of max bytes used to cache the code in memory
-                type: integer
-                example: 100000
-            maxBlockCache:
-                description: number of number of blocks cached  in memory
-                type: integer
-                example: 100
-            verifiedHashes:
-                description: if the client sends a array of blockhashes the server will not deliver any signatures or blockheaders for these blocks, but only return a string with a number. This is automaticly updated by the cache, but can be overriden per request.
-                type: array
-                items:
-                    type: string
-                    format: bytes32
-            proof:
-                description: if true the nodes should send a proof of the response
-                type: string
-                enum: ["none", "standard", "full"]
-                example: true
-            signatureCount:
-                description: number of signatures requested
-                type: number
-                example: 2
-            minDeposit:
-                type: number
-                description: min stake of the server. Only nodes owning at least this amount will be chosen.
-                example: 0
-            replaceLatestBlock:
-                description: if specified, the blocknumber *latest* will be replaced by blockNumber- specified value
-                type: integer
-                example: 6
-            requestCount:
-                type: number
-                min: 1
-                default: 1
-                description: the number of request send when getting a first answer
-                example: 3
-            finality:
-                type: number
-                min: 0
-                max: 100
-                default: 0
-                description: the number in percent needed in order reach finality (% of signature of the validators)
-                example: 50
-            timeout:
-                type: number
-                min: 1
-                default: 2000
-                description: specifies the number of milliseconds before the request times out. increasing may be helpful if the device uses a slow connection.
-                example: 3000
-            chainId:
-                type: string
-                pattern: ^0x[0-9a-fA-F]+$
-                description: servers to filter for the given chain. The chain-id based on EIP-155.
-                example: "0x1"
-            chainRegistry:
-                type: string
-                pattern: ^0x[0-9a-fA-F]+$
-                description: main chain-registry contract
-                example: "0xe36179e2286ef405e929C90ad3E70E649B22a945"
-            mainChain:
-                type: string
-                pattern: ^0x[0-9a-fA-F]+$
-                description: main chain-id, where the chain registry is running.
-                example: "0x1"
-            autoUpdateList:
-                type: boolean
-                description: if true the nodelist will be automaticly updated if the lastBlock is newer
-                example: true
-            cacheStorage:
-                description: a cache handler offering 2 functions ( setItem(string,string), getItem(string) )
-            loggerUrl:
-                type: string
-                description: a url of RES-Endpoint, the client will log all errors to. The client will post to this endpoint JSON like { id?, level, message, meta? }
-            rpc:
-                type: string
-                description: url of one or more rpc-endpoints to use. (list can be comma seperated)
-            servers:
-                type: object
-                description: the nodelist per chain
-                additionalProperties:
-                    type: object
-                    properties:
-                        verifier:
-                            type: string
-                            description: name of the module responsible for handling the verification
-                        name:
-                            type: string
-                            description: a alias for the chain
-                        chainSpec:
-                            type: array
-                            items:
-                                $ref: "#/definitions/ChainSpec"
-                            description: chain definitions
-                        initAddresses:
-                            description: a list of addresses which should always be part of the nodelist when getting an update
-                            type: array
-                            example:
-                                [
-                                    "0xe36179e2286ef405e929C90ad3E70E649B22a945",
-                                    "0x6d17b34aeaf95fee98c0437b4ac839d8a2ece1b1",
-                                ]
-                            items:
-                                type: string
-                        lastBlock:
-                            type: integer
-                            description: the blockNumber of the last event in the registry
-                            example: 23498798
-                        contract:
-                            type: string
-                            description: the address of the registry contract
-                            example: "0xe36179e2286ef405e929C90ad3E70E649B22a945"
-                        needsUpdate:
-                            type: boolean
-                            description: if true the nodelist should be updated.
-                        contractChain:
-                            type: string
-                            description: the chainid for the contract
-                            example: "0x8"
-                        nodeList:
-                            description: the list of nodes
-                            type: array
-                            items:
-                                $ref: "#/definitions/IN3NodeConfig"
-                        nodeAuthorities:
-                            description: the list of authority nodes for handling conflicts
-                            type: array
-                            example:
-                                [
-                                    "0xe36179e2286ef405e929C90ad3E70E649B22a945",
-                                    "0x6d17b34aeaf95fee98c0437b4ac839d8a2ece1b1",
-                                ]
-                            items:
-                                type: string
-                        weights:
-                            description: the weights of nodes depending on former performance which is used internally
-                            type: object
-                            additionalProperties:
-                                $ref: "#/definitions/IN3NodeWeight"
-
     RPCRequest:
         type: object
         description: a JSONRPC-Request with N3-Extension
@@ -458,36 +205,47 @@ definitions:
             in3Node:
                 description: the node handling this response (internal only)
                 $ref: "#/definitions/IN3NodeConfig"
-
-    AuraValidatoryProof:
+    IN3NodeConfig:
+        description: a configuration of a in3-server.
         type: object
-        description: a Object holding proofs for validator logs. The key is the blockNumber as hex
-        required: [logIndex, block, txIndex, proof]
+        required: [address, url, deposit, chainIds]
         properties:
-            logIndex:
-                description: the transaction log index
-                type: number
-            block:
-                description: the serialized blockheader
-                type: string
-                example: "0x72804cfa0179d648ccbe6a65b01a6463a8f1ebb14f3aff6b19cb91acf2b8ec1ffee98c0437b4ac839d8a2ece1b18166da704b86d8f42c92bbda6463a8f1ebb14f3aff6b19cb91acf2b8ec1ffee98c0437b4ac839d8a2ece1b18166da704b"
-            txIndex:
+            index:
+                description: the index within the contract
                 type: integer
-                description: the transactionIndex within the block
-            proof:
+                example: 13
+            address:
+                description: the address of the node, which is the public address it iis signing with.
+                type: string
+                format: address
+                example: "0x6C1a01C2aB554930A937B0a2E8105fB47946c679"
+            timeout:
+                description: the time (in seconds) until an owner is able to receive his deposit back after he unregisters himself
+                type: integer
+                example: 3600
+            url:
+                description: the endpoint to post to
+                type: string
+                example: "https://in3.slock.it"
+            chainIds:
+                description: the list of supported chains
+                example: ["0x1"]
                 type: array
-                description: the merkleProof
                 items:
                     type: string
-                    pattern: ^0x[0-9a-fA-F]+$
-            finalityBlocks:
-                type: array
-                description: the serialized blockheader as hex, required in case of finality asked
-                example:
-                    [
-                        "0x72804cfa0179d648ccbe6a65b01a6463a8f1ebb14f3aff6b19cb91acf2b8ec1ffee98c0437b4ac839d8a2ece1b18166da704b86d8f42c92bbda6463a8f1ebb14f3aff6b19cb91acf2b8ec1ffee98c0437b4ac839d8a2ece1b18166da704b",
-                    ]
-
+                    format: hex
+            deposit:
+                description: the deposit of the node in wei
+                type: integer
+                example: 12350000
+            capacity:
+                description: the capacity of the node.
+                type: integer
+                example: 100
+            props:
+                description: the properties of the node.
+                type: integer
+                example: 3
     LogProof:
         type: object
         description: a Object holding proofs for event logs. The key is the blockNumber as hex
@@ -530,7 +288,6 @@ definitions:
                                 items:
                                     type: string
                                     pattern: ^0x[0-9a-fA-F]+$
-
     Proof:
         type: object
         description: the Proof-data as part of the in3-section
@@ -681,192 +438,3 @@ definitions:
                             type: string
                             description: the stored value
                             pattern: ^0x[0-9a-fA-F]+$
-
-    ServerList:
-        type: object
-        description: a List of nodes
-        required: [nodes]
-        properties:
-            lastBlockNumber:
-                type: integer
-                description: last Block number
-            nodes:
-                type: array
-                description: the list of nodes
-                items:
-                    $ref: "#/definitions/IN3NodeConfig"
-            contract:
-                type: string
-                description: IN3 Registry
-                pattern: ^0x[0-9a-fA-F]+$
-            totalServers:
-                type: integer
-                description: number of servers
-            proof:
-                $ref: "#/definitions/Proof"
-
-    IN3RPCConfig:
-        type: object
-        description: the configuration for the rpc-handler
-        properties:
-            id:
-                type: string
-                description: a identifier used in logfiles as also for reading the config from the database
-            defaultChain:
-                type: string
-                description: the default chainId in case the request does not contain one.
-            port:
-                type: integer
-                default: 8500
-                description: the listeneing port for the server
-            db:
-                type: object
-                properties:
-                    user:
-                        type: string
-                        description: username for the db
-                    password:
-                        type: string
-                        description: password for db-access
-                    host:
-                        type: string
-                        description: db-host (default = localhost)
-                    port:
-                        type: integer
-                        description: the database port
-                    database:
-                        type: string
-                        description: name of the database
-            profile:
-                type: object
-                properties:
-                    icon:
-                        type: string
-                        description: url to a icon or logo of company offering this node
-                    url:
-                        type: string
-                        description: url of the website of the company
-                    name:
-                        type: string
-                        description: name of the node or company
-                    comment:
-                        type: string
-                        description: comments for the node
-                    noStats:
-                        type: boolean
-                        description: if active the stats will not be shown (default:false)
-            logging:
-                type: object
-                description: logger config
-                required: []
-                properties:
-                    file:
-                        type: string
-                        description: the path to the logile
-                    level:
-                        type: string
-                        description: Loglevel
-                    colors:
-                        type: boolean
-                        description: if true colors will be used
-                    name:
-                        type: string
-                        description: the name of the provider
-                    type:
-                        type: string
-                        description: the module of the provider
-                    port:
-                        type: integer
-                        description: the port for custom logging
-                    host:
-                        type: string
-                        description: the host for custom logging
-
-            chains:
-                type: object
-                description: a definition of the Handler per chain
-                additionalProperties:
-                    $ref: "#/definitions/IN3RPCHandlerConfig"
-
-    IN3RPCHandlerConfig:
-        type: object
-        description: the configuration for the rpc-handler
-        required: [rpcUrl, privateKey, registry]
-        properties:
-            handler:
-                type: string
-                description: the impl used to handle the calls
-                enum: [eth, ipfs, btc]
-            ipfsUrl:
-                type: string
-                description: the url of the ipfs-client
-            timeout:
-                type: integer
-                description: number of milliseconds to wait before a request gets a timeout
-            rpcUrl:
-                type: string
-                description: the url of the client
-            clientKeys:
-                type: string
-                description: a comma sepearted list of client keys to use for simulating clients for the watchdog
-            watchdogInterval:
-                type: number
-                description: average time between sending requests to the same node. 0 turns it off (default)
-            freeScore:
-                type: number
-                description: the score for requests without a valid signature
-            minBlockHeight:
-                type: integer
-                description: the minimal blockheight in order to sign
-            maxThreads:
-                type: integer
-                description: the maximal number of threads ofr running parallel processes
-            persistentFile:
-                type: string
-                description: the filename of the file keeping track of the last handled blocknumber
-            startBlock:
-                type: number
-                description: blocknumber to start watching the registry
-            watchInterval:
-                type: integer
-                description: the number of seconds of the interval for checking for new events
-            privateKey:
-                type: string
-                description: the private key used to sign blockhashes. this can be either a 0x-prefixed string with the raw private key or the path to a key-file.
-            privateKeyPassphrase:
-                type: string
-                description: the password used to decrpyt the private key
-            registry:
-                type: string
-                description: the address of the server registry used in order to update the nodeList
-            registryRPC:
-                type: string
-                description: the url of the client in case the registry is not on the same chain.
-            autoRegistry:
-                type: object
-                required: [url, deposit]
-                properties:
-                    url:
-                        type: string
-                        description: the public url to reach this node
-                    deposit:
-                        type: number
-                        description: the deposit you want ot store
-                    capacity:
-                        type: number
-                        description: max number of parallel requests
-                    depositUnit:
-                        type: string
-                        description: unit of the deposit value
-                        enum: ["ether", "finney", "szabo", "wei"]
-                    capabilities:
-                        type: object
-                        properties:
-                            proof:
-                                type: boolean
-                                description: if true, this node is able to deliver proofs
-                                flag: 1
-                            multiChain:
-                                type: boolean
-                                description: if true, this node is able to deliver multiple chains
-                                flag: 2

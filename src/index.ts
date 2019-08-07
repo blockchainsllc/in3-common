@@ -26,8 +26,8 @@ export const util = _util
 export const createRandomIndexes =  _util.createRandomIndexes
 export const getSigner = _util.getSigner
 
-import * as types from './types/types'
-export type RPCRequest = types.RPCRequest
+//import * as types from './types/types'
+/*export type RPCRequest = types.RPCRequest
 export type AccountProof = types.AccountProof
 export type IN3Config = types.IN3Config
 export type IN3NodeConfig = types.IN3NodeConfig
@@ -42,7 +42,7 @@ export type Signature = types.Signature
 export type ServerList = types.ServerList
 export type IN3RPCConfig = types.IN3RPCConfig
 export type IN3RPCHandlerConfig = types.IN3RPCHandlerConfig
-export type ChainSpec = types.ChainSpec
+export type ChainSpec = types.ChainSpec*/
 
 
 import * as _serialize from './util/serialize'
@@ -60,7 +60,7 @@ export const AxiosTransport = _transport.AxiosTransport
 import * as _storage from './util/storage'
 export const storage = _storage
 
-export const typeDefs = types.validationDef
+//export const typeDefs = types.validationDef
 export const chainAliases = _util.aliases
 
 import * as _cbor from './util/cbor'
