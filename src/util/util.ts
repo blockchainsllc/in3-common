@@ -22,7 +22,7 @@ const Buffer: any = require('buffer').Buffer
 
 import * as ethUtil from 'ethereumjs-util'
 import { RPCResponse } from '../types/types'
-import { Block, hash, rlp } from './serialize'
+import { Block, hash, rlp } from '../modules/eth/serialize'
 import { publicToAddress } from 'ethereumjs-util'
 import { recover } from 'secp256k1'
 

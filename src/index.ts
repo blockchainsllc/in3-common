@@ -45,7 +45,7 @@ export type IN3RPCHandlerConfig = types.IN3RPCHandlerConfig
 export type ChainSpec = types.ChainSpec*/
 
 
-import * as _serialize from './util/serialize'
+import * as _serialize from './modules/eth/serialize'
 export const serialize = _serialize
 export type BlockData = _serialize.BlockData
 export type LogData = _serialize.LogData
@@ -57,7 +57,7 @@ export const transport = _transport
 export type Transport = _transport.Transport
 export const AxiosTransport = _transport.AxiosTransport
 
-import * as _storage from './util/storage'
+import * as _storage from './modules/eth/storage'
 export const storage = _storage
 
 //export const typeDefs = types.validationDef
