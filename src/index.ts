@@ -51,6 +51,7 @@ export type BlockData = _serialize.BlockData
 export type LogData = _serialize.LogData
 export type ReceiptData = _serialize.ReceiptData
 export type TransactionData = _serialize.TransactionData
+export const Block = _serialize.Block
 export type Block = _serialize.Block
 export type Receipt = _serialize.Receipt
 export type Transaction = _serialize.Transaction
