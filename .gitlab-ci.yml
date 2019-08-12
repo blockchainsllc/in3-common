@@ -17,6 +17,7 @@ build-in3:
   tags:
     - short-jobs
   script:
+    - sh /prepare.sh
     - npm install
     - npm run build
   artifacts:
