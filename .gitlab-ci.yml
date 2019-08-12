@@ -19,7 +19,7 @@ build-in3:
   script:
     - sh /prepare.sh
     - npm install
-    - npm run build
+    - npm run-script build
   artifacts:
     paths:
       - js/
