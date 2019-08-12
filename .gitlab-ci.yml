@@ -61,6 +61,7 @@ test-in3:
     - cd in3
     - npm install
     - cd node_modules
+    - rm -rf in3-common
     - ln -s ln -s /builds/in3/ts/in3-common in3-common
     - cd ..
     - npm run build
