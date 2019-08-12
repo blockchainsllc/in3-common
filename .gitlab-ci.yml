@@ -68,7 +68,50 @@ test-in3:
     - npm test; echo "done"
     - cd ..
     - rm -rf in3-testing
-
+  
+test-in3-server-parity:
+  stage: test
+  tags:
+    - short-jobs
+  variables:
+    RPCURL: http://parity:8545
+    USN_TESTMODE: parity
+    TEST_RESULTS: test/results/parity/
+    TEST_SCOPE: short
+  services:
+    - name: parity/parity:stable
+      command:
+        - --jsonrpc-experimental
+        - --jsonrpc-apis=all
+        - --logging=3
+        - --jsonrpc-interface=all
+        - --ws-interface=all
+        - --chain=dev
+        - --gas-cap=8000000
+        - --gasprice=0
+        - --reseal-min-period=0
+        - --gas-floor-target=8700000
+        - --tracing=on
+      alias: parity
+  script:
+    - sh /prepare.sh
+    - npm install
+    - npm run build
+    - cd ..
+    - rm -rf in3-server-testing-parity
+    - mkdir in3-server-testing-parity
+    - cd in3-server-testing-parity
+    - git clone https://gitlab-ci-token:${CI_JOB_TOKEN}@git.slock.it/in3/ts/in3-server.git -b 36-decoupling-in3-server-and-in3-client --single-branch
+    - cd in3-server
+    - npm install
+    - cd node_modules
+    - rm -rf in3-common
+    - ln -s /builds/in3/ts/in3-common in3-common
+    - cd ..
+    - npm run build
+    - npm test; echo "done"
+    - cd ..
+    - rm -rf in3-server-testing-parity
 
 deploy-to-slockit-npm:
   stage: deploy
