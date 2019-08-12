@@ -26,7 +26,7 @@ build-in3:
       - js/
 
 test-in3:
- stage: test
+  stage: test
   tags:
     - short-jobs
   variables:
