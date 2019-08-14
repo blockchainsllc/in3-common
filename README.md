@@ -1,5 +1,5 @@
 # IN3 Common
-IN3 Common have common set of utilities and other functions shich are used in IN3 Server and IN3 Client. It have following components.
+IN3 Common have common set of utilities and other functions which are used in IN3 Server and IN3 Client. It have following components.
 
 ### Modules
 - **eth serialize 
