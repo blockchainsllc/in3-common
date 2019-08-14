@@ -4,6 +4,9 @@
   "description": "Common functions for in3 server and in3 client (ts versions )",
   "main": "js/src/index.js",
   "scripts": {
+        "docu": "typedoc  --exclude test --excludePrivate  --readme none --ignoreCompilerErrors --target ES6  --mode 'modules' --json doc.json src/index.ts ; cat  doc.json | slockit-docu index slockit/in3-common/blob/master/src \"# Common Data Structures\n\nThis page contains a list of all Datastructures and Classes used within the IN3 Client and Server.\n\" >  src/README.md ; rm doc.json",
+    "updateTypes": "npm install slockit-generator; cd node_modules/slockit-generator; npm run build; cd ../..; slockit-types ",
+    "changelog": "auto-changelog",
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc -p .; cp src/defaultConfig.json js/"
   },
