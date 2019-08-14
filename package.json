@@ -7,8 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc -p .; cp src/defaultConfig.json js/"
   },
-  "author": "M. Junaid Taj",
-  "license": "ISC",
+  "author": "Simon Jentzsch",
+  "license": "IN3",
   "devDependencies": {
     "@types/mocha": "^5.2.0",
     "mocha": "^5.1.1",
