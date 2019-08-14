@@ -1,19 +1,19 @@
-## IN3 Common
+# IN3 Common
 IN3 Common have common set of utilities and other functions shich are used in IN3 Server and IN3 Client. It have following components.
 
-# Modules
+### Modules
  **eth serialize 
  **storage
 
-# Types
+### Types
  **Types used in in3-common only
 
-# Util
+### Util
  **cbor
  **transport
  **util
  **validate
 
-# Default Config
+### Default Config
  Default configuration used in in3 client and server
- 
+
