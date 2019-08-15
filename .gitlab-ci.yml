@@ -57,7 +57,7 @@ test-in3:
     - rm -rf in3-testing
     - mkdir in3-testing
     - cd in3-testing
-    - git clone https://gitlab-ci-token:${CI_JOB_TOKEN}@git.slock.it/in3/ts/in3.git -b 61-decopling-in3-client-and-server --single-branch
+    - git clone https://gitlab-ci-token:${CI_JOB_TOKEN}@git.slock.it/in3/ts/in3.git  --single-branch
     - cd in3
     - npm install
     - cd node_modules
