@@ -154,6 +154,10 @@ definitions:
                 description: the current blocknumber.
                 type: number
                 example: 320126478
+            version:
+                description: the in3 protocol version.
+                type: string
+                example: '1.0.0'
 
     RPCRequest:
         type: object

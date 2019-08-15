@@ -398,4 +398,8 @@ export interface IN3ResponseConfig {
      * example: 320126478
      */
     currentBlock?: number
+    /**
+     * IN3 protocol version numbers
+     */
+    version?: string
 }
