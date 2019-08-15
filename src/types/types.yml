@@ -188,6 +188,10 @@ definitions:
                 description: the version
                 type: string
                 enum: ["2.0"]
+            in3Version:
+                description: IN3 protocol version
+                type: string
+                example: "1.0.0"
             id:
                 description: the id matching the request
                 type: [string, number]

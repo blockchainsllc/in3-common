@@ -155,6 +155,10 @@ export interface RPCResponse {
      */
     jsonrpc: '2.0'
     /**
+     * the in3 protocol version
+     */
+    in3Version: string
+    /**
      * the id matching the request
      * example: 2
      */
