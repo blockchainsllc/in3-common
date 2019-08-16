@@ -247,6 +247,14 @@ definitions:
                 description: the properties of the node.
                 type: integer
                 example: 3
+            registerTime:
+                description: the UNIX-timestamp when the node was registered
+                type: integer
+                example: 1563279168
+            unregisterTime:
+                description: the UNIX-timestamp when the node is allowed to be deregister
+                type: integer
+                example: 1563279168
     LogProof:
         type: object
         description: a Object holding proofs for event logs. The key is the blockNumber as hex

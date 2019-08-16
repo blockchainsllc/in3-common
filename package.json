@@ -4,8 +4,8 @@
   "description": "Common functions for in3 server and in3 client (ts versions )",
   "main": "js/src/index.js",
   "scripts": {
-        "docu": "typedoc  --exclude test --excludePrivate  --readme none --ignoreCompilerErrors --target ES6  --mode 'modules' --json doc.json src/index.ts ; cat  doc.json | slockit-docu index slockit/in3-common/blob/master/src \"# Common Data Structures\n\nThis page contains a list of all Datastructures and Classes used within the IN3 Client and Server.\n\" >  src/README.md ; rm doc.json",
-    "updateTypes": "npm install slockit-generator; cd node_modules/slockit-generator; npm run build; cd ../..; slockit-types ",
+    "docu": "typedoc  --exclude test --excludePrivate  --readme none --ignoreCompilerErrors --target ES6  --mode 'modules' --json doc.json src/index.ts ; cat  doc.json | slockit-docu index slockit/in3-common/blob/master/src \"# Common Data Structures\n\nThis page contains a list of all Datastructures and Classes used within the IN3 Client and Server.\n\" >  src/README.md ; rm doc.json",
+    "updateTypes": "npm install slockit-generator; slockit-types ; npm uninstall slockit-generator",
     "changelog": "auto-changelog",
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc -p .; cp src/defaultConfig.json js/"
@@ -16,7 +16,8 @@
     "@types/mocha": "^5.2.0",
     "mocha": "^5.1.1",
     "typescript": "^3.5.3",
-    "@types/node": "12.0.8"
+    "@types/node": "12.0.8",
+    "typedoc": "^0.11.1"
   },
   "dependencies": {
     "ajv": "^6.10.2",
