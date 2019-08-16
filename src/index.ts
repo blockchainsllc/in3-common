@@ -79,6 +79,7 @@ export const bytes32 = _serialize.bytes32
 export const bytes8 = _serialize.bytes8
 export const uint = _serialize.uint
 export const uint64 = _serialize.uint64
+export const uint128 = _serialize.uint128
 export const address = _serialize.address
 export const bytes = _serialize.bytes
 export const toTransaction = _serialize.toTransaction
