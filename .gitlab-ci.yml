@@ -1,0 +1,100 @@
+image: docker.slock.it/build-images/node:11-alpine
+variables:
+  COMMIT_IMAGE_TAG: $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_NAME
+  RELEASE_IMAGE_TAG: $CI_REGISTRY_IMAGE:latest
+
+stages:
+  - build
+  - test
+  - deploy
+
+cache:
+  key: ${CI_COMMIT_REF_SLUG}
+  paths:
+    - node_modules/
+
+build-in3:
+  stage: build
+  tags:
+    - short-jobs
+  script:
+    - sh /prepare.sh
+    - npm install
+    - npm run-script build
+  artifacts:
+    paths:
+      - js/
+
+test-in3:
+  stage: test
+  tags:
+    - short-jobs
+  variables:
+    RPCURL: http://parity:8545
+    USN_TESTMODE: parity
+    TEST_RESULTS: test/results/parity/
+    TEST_SCOPE: short
+  services:
+    - name: parity/parity:stable
+      command:
+        - --jsonrpc-experimental
+        - --jsonrpc-apis=all
+        - --logging=3
+        - --jsonrpc-interface=all
+        - --ws-interface=all
+        - --chain=dev
+        - --gas-cap=8000000
+        - --gasprice=0
+        - --reseal-min-period=0
+        - --gas-floor-target=8700000
+        - --tracing=on
+      alias: parity
+  script:
+    - sh /prepare.sh
+    - npm install
+    - npm run build
+    - cd ..
+    - rm -rf in3-testing
+    - mkdir in3-testing
+    - cd in3-testing
+    - git clone https://gitlab-ci-token:${CI_JOB_TOKEN}@git.slock.it/in3/ts/in3.git  --single-branch
+    - cd in3
+    - npm install
+    - cd node_modules
+    - rm -rf in3-common
+    - ln -s /builds/in3/ts/in3-common in3-common
+    - cd ..
+    - npm run build
+    - npm test; echo "done"
+    - cd ..
+    - rm -rf in3-testing
+  
+deploy-to-slockit-npm:
+  stage: deploy
+  tags:
+    - short-jobs
+  only: # deploy only on  semantic versions tags
+    - /^v[0-9]*\.[0-9]*\.[0-9]*-?.*$/
+  except:
+    - branches
+  dependencies:
+    - build-in3
+  script:
+    - sh /prepare.sh
+    - npm --no-git-tag-version --allow-same-version -f version $CI_COMMIT_TAG
+    - npm publish
+    
+deploy-to-slockit-public_npm:
+  stage: deploy
+  tags:
+    - short-jobs
+  only: # deploy only on  semantic versions tags
+    - /^v[0-9]+.[0-9]+.[0-9]+$/
+  except:
+    - branches
+  dependencies:
+    - test-in3
+  script:
+    - sh /prepare.sh
+    - npm --no-git-tag-version --allow-same-version -f version $CI_COMMIT_TAG
+    - npm publish --registry https://registry.npmjs.org
