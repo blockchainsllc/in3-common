@@ -81,7 +81,7 @@ export class AxiosTransport implements Transport {
       if (res.status > 200) throw new Error('Invalid status')
 
       // if this was not given as array, we need to convert it back to a single object
-      return Array.isArray(data) ? res.data : res.data[0]
+      return (Array.isArray(data) || !Array.isArray(res.data)) ? res.data : res.data[0]
     } catch (err) {
       throw new Error('Invalid response from ' + url + '(' + JSON.stringify(requests, null, 2) + ')' + ' : ' + err.message + (err.response ? (err.response.data || err.response.statusText) : ''))
     }
