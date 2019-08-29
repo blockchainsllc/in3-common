@@ -194,8 +194,19 @@ definitions:
                 type: [string, number]
                 example: 2
             error:
-                description: in case of an error this needs to be set
-                type: string
+                description: JSON RPC error object
+                required: [message]
+                type: object
+                properties:
+                    code:
+                        description: number that shows error type
+                        type: integer
+                    message:
+                        description: short description of error
+                        type: string
+                    data:
+                        description: detailed structured information of error
+                        type: any
             result:
                 description: the params
                 example: "0xa35bc"

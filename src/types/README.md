@@ -199,6 +199,7 @@ import {types} from 'in3-common'
 const rPCResponse:types.RPCResponse = {
   jsonrpc: '2.0',
   id: 2,
+  error: {},
   result: '0xa35bc',
   in3: {
     proof: {
@@ -255,7 +256,11 @@ const rPCResponse:types.RPCResponse = {
 *  **jsonrpc** `string` (required)  - the version   
  Must be one of the these values : `'2.0`'
 *  **id** `string,number` (required)  - the id matching the request   
-*  **error** `string` - in case of an error this needs to be set   
+*  **error** `object` - JSON RPC error object   
+    properties: 
+    *  **code** `integer` - number that shows error type   
+    *  **message** `string` (required)  - short description of error   
+    *  **data** `any` - detailed structured information of error   
 *  **result** [{"description":"the params","example":"0xa35bc"}](#{"description":"the params","example":"0xa35bc"}) - the params   
 *  **in3** [IN3ResponseConfig](#in3responseconfig) - the IN3-Result   
 *  **in3Node** [IN3NodeConfig](#in3nodeconfig) - the node handling this response (internal only)   

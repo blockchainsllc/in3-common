@@ -61,7 +61,7 @@ export function toUtf8(val: any): string {
 export function checkForError<T extends RPCResponse | RPCResponse[]>(res: T): T {
   if (Array.isArray(res))
     return res.find(_ => !!_.error) ? Promise.reject(new Error(res.find(_ => !!_.error).error)) as any : res as T
-  return (res as RPCResponse).error ? Promise.reject(new Error((res as RPCResponse).error)) as any : res as T
+  return (res as RPCResponse).error ? Promise.reject(new Error((res as RPCResponse).error.message)) as any : res as T
 }
 
 /**
