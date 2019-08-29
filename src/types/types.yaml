@@ -205,8 +205,8 @@ definitions:
                         description: short description of error
                         type: string
                     data:
-                        description: detailed structured information of error
-                        type: any
+                        description: detailed structured information of error, can be stack trace
+                        type: string
             result:
                 description: the params
                 example: "0xa35bc"

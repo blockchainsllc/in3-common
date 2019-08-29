@@ -260,7 +260,7 @@ const rPCResponse:types.RPCResponse = {
     properties: 
     *  **code** `integer` - number that shows error type   
     *  **message** `string` (required)  - short description of error   
-    *  **data** `any` - detailed structured information of error   
+    *  **data** `string` - detailed structured information of error, can be stack trace   
 *  **result** [{"description":"the params","example":"0xa35bc"}](#{"description":"the params","example":"0xa35bc"}) - the params   
 *  **in3** [IN3ResponseConfig](#in3responseconfig) - the IN3-Result   
 *  **in3Node** [IN3NodeConfig](#in3nodeconfig) - the node handling this response (internal only)   
