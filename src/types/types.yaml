@@ -95,6 +95,10 @@ definitions:
                 items:
                     type: string
                     format: address
+            version:
+                description: IN3 protocol version that client can specify explicitly in request
+                type: string
+                example: "1.0.0"
 
     Signature:
         description: Verified ECDSA Signature. Signatures are a pair (r, s). Where r is computed as the X coordinate of a point R, modulo the curve order n.
@@ -154,6 +158,10 @@ definitions:
                 description: the current blocknumber.
                 type: number
                 example: 320126478
+            version:
+                description: the in3 protocol version.
+                type: string
+                example: '1.0.0'
 
     RPCRequest:
         type: object
