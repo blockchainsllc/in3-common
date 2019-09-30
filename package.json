@@ -11,7 +11,7 @@
     "build": "tsc -p .; cp src/defaultConfig.json js/"
   },
   "author": "Simon Jentzsch",
-  "license": "IN3",
+  "license": "(AGPL-3.0-or-later OR commercial)",
   "devDependencies": {
     "@types/bn.js": "^4.11.5",
     "@types/mocha": "^5.2.0",
