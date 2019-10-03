@@ -14,8 +14,8 @@
       "name": "mainnet",
       "needsUpdate": true,
       "contractChain": "0x1",
-      "registryId": "0x48667ae295b704e285fdbb4ad61e02af6040a1bc73bca8db450864fc44c549f1",
-      "contract": "0x40f1929b349107a65e705cdbe13c496840e12d51",
+      "registryId": "0x423dd84f33a44f60e5d58090dcdcc1c047f57be895415822f211b8cd1fd692e3",
+      "contract": "0x64abe24afbba64cae47e3dc3ced0fcab95e4edd5",
       "nodeList": [
         {
           "deposit": 0,
@@ -69,8 +69,8 @@
       ],
       "needsUpdate": true,
       "contractChain": "0x5",
-      "registryId": "0xfd9cfed117a4db071756bae3878597b3c16b189a8bdb8ce3f35846e691631f8d",
-      "contract": "0xc5fb30ebfabc3171c0f6406d3fbacdc78dea102c",
+      "registryId": "0xa551fe03f855370f0fca881f5f2f6b8f7731a92e371c4de5f5c610833881059c",
+      "contract": "0xfea298b288d232a256ae0ad5941e5c890b1db691",
       "nodeList": [
         {
           "deposit": 0,
@@ -136,8 +136,8 @@
       ],
       "needsUpdate": true,
       "contractChain": "0x2a",
-      "registryId": "0x8fcf242e4ac27a3bc35ba07c1d3ca460ce863ac9bcf8349083c44810278caff9",
-      "contract": "0x102561587b165a9cb4cbb41d4f65981e66a86aed",
+      "registryId": "0x97a2d1de242ffd28c95eed23a336578c406b5966daf2818f0bd1c310f7292307",
+      "contract": "0x33f55122c21cc87b539e7003f7ab16229bc3af69",
       "nodeList": [
         {
           "deposit": 0,
