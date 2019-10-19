@@ -294,6 +294,8 @@ export class Block {
 
 /** creates a Transaction-object from the rpc-transaction-data */
 export function createTx(transaction) {
+  if (transaction && typeof (transaction) === 'string' && transaction.startsWith('0x'))
+    return new Tx(Buffer.from(transaction.substr(2), 'hex'))
   const txParams = {
     ...transaction,
     nonce: toHex(transaction.nonce) || '0x00',
