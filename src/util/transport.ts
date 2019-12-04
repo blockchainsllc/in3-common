@@ -35,6 +35,7 @@
 import { RPCRequest, RPCResponse } from '../types/types';
 import axios from 'axios'
 import * as cbor from 'cbor'
+const Sentry = require('@sentry/node')
 
 /**
  * A Transport-object responsible to transport the message to the handler.
@@ -98,6 +99,17 @@ export class AxiosTransport implements Transport {
       // if this was not given as array, we need to convert it back to a single object
       return (Array.isArray(data) || !Array.isArray(res.data)) ? res.data : res.data[0]
     } catch (err) {
+      if (process && process.env && process.env.SENTRY_ENABLE === 'true') {
+        Sentry.configureScope((scope) => {
+          scope.setTag("rpc", "handle");
+          scope.setTag("status_error", "invalid response");
+          scope.setExtra("url", url)
+          scope.setExtra("data", data)
+          scope.setExtra("transport_request", requests)
+          scope.setExtra("err_response", (err.response ? (err.response.data || err.response.statusText) : ''))
+        });
+        Sentry.captureException(err);
+      }
       throw new Error('Invalid response from ' + url + '(' + JSON.stringify(requests, null, 2) + ')' + ' : ' + err.message + (err.response ? (err.response.data || err.response.statusText) : ''))
     }
   }
