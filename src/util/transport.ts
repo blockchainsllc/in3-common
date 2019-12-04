@@ -99,7 +99,7 @@ export class AxiosTransport implements Transport {
       // if this was not given as array, we need to convert it back to a single object
       return (Array.isArray(data) || !Array.isArray(res.data)) ? res.data : res.data[0]
     } catch (err) {
-      if (process.env.SENTRY_ENABLE === 'true') {
+      if (process && process.env && process.env.SENTRY_ENABLE === 'true') {
         Sentry.configureScope((scope) => {
           scope.setTag("rpc", "handle");
           scope.setTag("status_error", "invalid response");
