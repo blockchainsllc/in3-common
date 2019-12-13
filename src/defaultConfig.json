@@ -13,8 +13,8 @@
       "name": "mainnet",
       "needsUpdate": true,
       "contractChain": "0x1",
-      "registryId": "0x423dd84f33a44f60e5d58090dcdcc1c047f57be895415822f211b8cd1fd692e3",
-      "contract": "0x64abe24afbba64cae47e3dc3ced0fcab95e4edd5",
+      "registryId": "0x23d5345c5c13180a8080bd5ddbe7cde64683755dcce6e734d95b7b573845facb",
+      "contract": "0xac1b824795e1eb1f6e609fe0da9b9af8beaab60f",
       "nodeList": [
         {
           "deposit": 0,
@@ -184,7 +184,8 @@
           "props": 65535
         }
       ]
-    },    "0x7d0": {
+    },
+    "0x7d0": {
       "name": "ipfs",
       "verifier": "ipfs",
       "needsUpdate": true,
