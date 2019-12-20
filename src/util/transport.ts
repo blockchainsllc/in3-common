@@ -70,7 +70,12 @@ export class AxiosTransport implements Transport {
   }
 
   isOnline(): Promise<boolean> {
-    return axios.head('https://www.google.com').then(_ => true, _ => false)
+    try {
+      return Promise.resolve(navigator.onLine)
+    }
+    catch {
+      return axios.head('https://www.google.com').then(_ => true, _ => false)
+    }
   }
 
   async handle(url: string, data: RPCRequest | RPCRequest[], timeout?: number): Promise<RPCResponse | RPCResponse[]> {
