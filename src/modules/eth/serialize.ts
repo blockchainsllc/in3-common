@@ -302,7 +302,8 @@ export function createTx(transaction) {
     gasPrice: toHex(transaction.gasPrice) || '0x00',
     value: toHex(transaction.value || 0),
     gasLimit: toHex(transaction.gasLimit === undefined ? transaction.gas : transaction.gasLimit),
-    data: toHex(transaction.gasLimit === undefined ? transaction.input : transaction.data),
+    data: toHex(transaction.gasLimit === undefined ? (transaction.input || transaction.data) : transaction.data),
+    input: toHex(transaction.gasLimit === undefined ? (transaction.input || transaction.data) : transaction.data),
     to: transaction.to ? ethUtil.setLengthLeft(ethUtil.toBuffer(transaction.to), 20) : null,
     v: transaction.v < 27 ? transaction.v + 27 : transaction.v
   }
