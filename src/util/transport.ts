@@ -34,7 +34,6 @@
 
 import { RPCRequest, RPCResponse } from '../types/types';
 import axios from 'axios'
-import * as cbor from 'cbor'
 
 /**
  * A Transport-object responsible to transport the message to the handler.
@@ -63,10 +62,13 @@ export interface Transport {
  */
 export class AxiosTransport implements Transport {
 
+  axiosConfig: any
+
   format: ('json' | 'cbor' | 'jsonRef')
 
   constructor(format: ('json' | 'cbor' | 'jsonRef') = 'json') {
     this.format = format
+    this.axiosConfig = {}
   }
 
   isOnline(): Promise<boolean> {
@@ -83,14 +85,7 @@ export class AxiosTransport implements Transport {
     const requests = Array.isArray(data) ? data : [data]
 
     // add cbor-config
-    const conf = { headers: { 'Content-Type': 'application/json' } }
-    if (this.format === 'cbor')
-      Object.assign(conf, {
-        transformRequest: cbor.encodeRequests,
-        transformResponse: cbor.decodeResponses,
-        headers: { 'Content-Type': 'application/cbor' },
-        responseType: 'arraybuffer'
-      })
+    const conf = { headers: { 'Content-Type': 'application/json' }, ...this.axiosConfig }
 
     // execute request
     try {
@@ -114,4 +109,21 @@ export class AxiosTransport implements Transport {
     return result
   }
 
+}
+
+/**
+ * accepts even invalid or self signed SSL-Certificates (only for nodejs)
+ */
+export class NoneRejectingAxiosTransport extends AxiosTransport {
+  constructor(format: ('json' | 'cbor' | 'jsonRef') = 'json') {
+    super(format)
+    try {
+      const Agent = require('http' + 's').Agent
+      this.axiosConfig.agent = new Agent({ rejectUnauthorized: false })
+      process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0'
+    }
+    catch (x) {
+
+    }
+  }
 }
