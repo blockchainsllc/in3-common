@@ -75,6 +75,7 @@ import * as _transport from './util/transport'
 export const transport = _transport
 export type Transport = _transport.Transport
 export const AxiosTransport = _transport.AxiosTransport
+export const NoneRejectingAxiosTransport = _transport.NoneRejectingAxiosTransport
 
 import * as _storage from './modules/eth/storage'
 export const storage = _storage
