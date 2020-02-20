@@ -313,7 +313,7 @@ export function createTx(transaction) {
   tx._from = fromAddress
   tx.getSenderAddress = function () { return fromAddress }
   if (txParams.hash && txParams.hash !== '0x' + ethUtil.keccak(tx.serialize()).toString('hex'))
-    throw new Error('wrong txhash! : ' + (txParams.hash + '!== 0x' + ethUtil.keccak(tx.serialize()).toString('hex')) + '  full tx=' + tx.serialize().toString('hex'))
+    throw new Error('wrong txhash! : ' + (txParams.hash + '!== 0x' + ethUtil.keccak(tx.serialize()).toString('hex')) + '  full tx=' + tx.serialize().toString('hex') + ' ' + JSON.stringify(transaction, null, 2))
 
   // override hash
   const txHash = ethUtil.toBuffer(txParams.hash)
