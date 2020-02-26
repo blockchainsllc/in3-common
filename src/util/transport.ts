@@ -68,7 +68,7 @@ export class AxiosTransport implements Transport {
 
   constructor(format: ('json' | 'cbor' | 'jsonRef') = 'json') {
     this.format = format
-    this.axiosConfig = {}
+    this.axiosConfig = { headers: {} }
   }
 
   isOnline(): Promise<boolean> {
@@ -85,7 +85,7 @@ export class AxiosTransport implements Transport {
     const requests = Array.isArray(data) ? data : [data]
 
     // add cbor-config
-    const conf = { headers: { 'Content-Type': 'application/json' }, ...this.axiosConfig }
+    const conf = { ...this.axiosConfig, headers: { ...(this.axiosConfig.headers || {}), 'Content-Type': 'application/json' } }
 
     // execute request
     try {
