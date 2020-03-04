@@ -33,7 +33,7 @@
  *******************************************************************************/
 
 import * as ethUtil from 'ethereumjs-util'
-import * as Tx from 'ethereumjs-tx'
+import {Transaction as Tx} from 'ethereumjs-tx'
 import { toBuffer, toHex } from '../../util/util'
 
 /** RLP-functions */
