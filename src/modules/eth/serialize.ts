@@ -33,7 +33,7 @@
  *******************************************************************************/
 
 import * as ethUtil from 'ethereumjs-util'
-import {Transaction as Tx} from 'ethereumjs-tx'
+import * as Tx from 'ethereumjs-tx'
 import { toBuffer, toHex } from '../../util/util'
 
 /** RLP-functions */
@@ -243,7 +243,7 @@ export class Block {
   raw: BlockHeader
 
   /** the transaction-Object (if given) */
-  transactions: Tx[]
+  transactions: Tx.Transaction[]
 
   get parentHash() { return this.raw[0] }
   get uncleHash() { return this.raw[1] }
@@ -332,7 +332,6 @@ export function blockToHex(block: any) {
 export function blockFromHex(hex: string) {
   return new Block(hex)
 }
-
 
 
 
