@@ -243,7 +243,7 @@ export class Block {
   raw: BlockHeader
 
   /** the transaction-Object (if given) */
-  transactions: Tx.Transaction[]
+  transactions:  any[]
 
   get parentHash() { return this.raw[0] }
   get uncleHash() { return this.raw[1] }
