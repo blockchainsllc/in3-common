@@ -36,6 +36,34 @@
         }
       ]
     },
+   "0xf6": {
+      "verifier": "eth",
+      "name": "ewc",
+      "needsUpdate": true,
+      "contractChain": "0xf6",
+      "registryId": "0x313454c05fc6e5336a3315ed2233da6b831d4cb826d836c3d603f2e2a9f1ed75",
+      "contract": "0x039562872008f7a76674a6e7842804f0ad37cb13",
+      "nodeList": [
+        {
+          "deposit": 0,
+          "chainIds": [
+            "0xf6"
+          ],
+          "address": "0x45d45e6ff99e6c34a235d263965910298985fcfe",
+          "url": "https://in3-v2.slock.it/ewc/nd-1",
+          "props": 65535
+        },
+        {
+          "deposit": 0,
+          "chainIds": [
+            "0xf6"
+          ],
+          "address": "0x1fe2e9bf29aa1938859af64c413361227d04059a",
+          "url": "https://in3-v2.slock.it/ewc/nd-2",
+          "props": 65535
+        }
+      ]
+    },
     "0xffff": {
       "name": "local rpc",
       "verifier": "eth",
